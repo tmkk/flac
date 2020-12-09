@@ -105,11 +105,7 @@ void FLAC__lpc_compute_autocorrelation_intrin_power8_vsx_lag_12(const FLAC__real
 void FLAC__lpc_compute_autocorrelation_intrin_power8_vsx_lag_16(const FLAC__real data[], uint32_t data_len, uint32_t lag, FLAC__real autoc[]);
 #endif
 #endif
-#ifdef FLAC__CPU_ARM
-#include <arm_neon.h>
-float32x4_t shufffleVector(float32x4_t vec);
-float32x4_t shufffleVector_3012(float32x4_t vec);
-float32x4_t copyLane(float32x4_t dest, float32x4_t source);
+#if defined(FLAC__CPU_ARM) && defined(FLAC__HAS_NEONINTRIN)
 void FLAC__lpc_compute_autocorrelation_intrin_neon_lag_4(const FLAC__real data[], uint32_t data_len, uint32_t lag, FLAC__real autoc[]);
 void FLAC__lpc_compute_autocorrelation_intrin_neon_lag_8(const FLAC__real data[], uint32_t data_len, uint32_t lag, FLAC__real autoc[]);
 void FLAC__lpc_compute_autocorrelation_intrin_neon_lag_12(const FLAC__real data[], uint32_t data_len, uint32_t lag, FLAC__real autoc[]);
@@ -199,6 +195,11 @@ void FLAC__lpc_compute_residual_from_qlp_coefficients_16_intrin_avx2(const FLAC_
 void FLAC__lpc_compute_residual_from_qlp_coefficients_intrin_avx2(const FLAC__int32 *data, uint32_t data_len, const FLAC__int32 qlp_coeff[], uint32_t order, int lp_quantization, FLAC__int32 residual[]);
 void FLAC__lpc_compute_residual_from_qlp_coefficients_wide_intrin_avx2(const FLAC__int32 *data, uint32_t data_len, const FLAC__int32 qlp_coeff[], uint32_t order, int lp_quantization, FLAC__int32 residual[]);
 #    endif
+#  endif
+#  if defined(FLAC__CPU_ARM) && defined(FLAC__HAS_NEONINTRIN)
+void FLAC__lpc_compute_residual_from_qlp_coefficients_16_intrin_neon(const FLAC__int32 *data, uint32_t data_len, const FLAC__int32 qlp_coeff[], uint32_t order, int lp_quantization, FLAC__int32 residual[]);
+void FLAC__lpc_compute_residual_from_qlp_coefficients_intrin_neon(const FLAC__int32 *data, uint32_t data_len, const FLAC__int32 qlp_coeff[], uint32_t order, int lp_quantization, FLAC__int32 residual[]);
+void FLAC__lpc_compute_residual_from_qlp_coefficients_wide_intrin_neon(const FLAC__int32 *data, uint32_t data_len, const FLAC__int32 qlp_coeff[], uint32_t order, int lp_quantization, FLAC__int32 residual[]);
 #  endif
 #endif
 
