@@ -2,7 +2,7 @@
 
 #ifndef FLAC__INTEGER_ONLY_LIBRARY
 #ifndef FLAC__NO_ASM
-#if defined FLAC__CPU_ARM && FLAC__HAS_NEONINTRIN
+#if defined(FLAC__CPU_ARM) && defined(FLAC__HAS_NEONINTRIN)
 #include "private/lpc.h"
 #include "FLAC/assert.h"
 #include "FLAC/format.h"
